@@ -7,6 +7,7 @@ description: |
   process, signs the resulting artifact and exposes the protected
   APK/AAB through the MAD_OUTPUT_FILE output.
 
+website: https://www.mobileappdefense.com/
 source_code_url: https://github.com/showmeyourhands/MAD.git
 support_url: https://github.com/showmeyourhands/MAD/issues
 
