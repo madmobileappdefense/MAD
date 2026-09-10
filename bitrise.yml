@@ -1,0 +1,16 @@
+format_version: "13"
+
+project_type: other
+
+workflows:
+  test:
+    steps:
+      - script:
+          title: Validate MAD Step files
+          inputs:
+            - content: |
+                #!/usr/bin/env bash
+                set -euo pipefail
+                test -f step.yml
+                test -x step.sh
+                echo "MAD Android Step structure OK"
