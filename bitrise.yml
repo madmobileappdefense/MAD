@@ -1,0 +1,59 @@
+format_version: "13"
+
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
+project_type: other
+
+app:
+  envs:
+    - BITRISE_STEP_ID: mad-android
+    - BITRISE_STEP_VERSION: "1.0.0"
+    - BITRISE_STEP_GIT_CLONE_URL: git@github.com:madmobileappdefense/MAD.git
+    - MY_STEPLIB_REPO_FORK_GIT_URL: git@github.com:madmobileappdefense/bitrise-steplib.git
+
+workflows:
+  test:
+    steps:
+      - script:
+          title: Validate MAD Step files
+          inputs:
+            - content: |
+                #!/usr/bin/env bash
+                set -euo pipefail
+
+                test -f step.yml
+                test -f step.sh
+                test -x step.sh
+
+                echo "MAD Android Step structure OK"
+
+  audit-this-step:
+    steps:
+      - script:
+          title: Audit step.yml
+          inputs:
+            - content: |
+                #!/usr/bin/env bash
+                set -euo pipefail
+
+                stepman audit --step-yml ./step.yml
+
+  share-this-step:
+    steps:
+      - script:
+          title: Share MAD Android Step
+          inputs:
+            - content: |
+                #!/usr/bin/env bash
+                set -euo pipefail
+
+                bitrise share start -c "$MY_STEPLIB_REPO_FORK_GIT_URL"
+
+                bitrise share create \
+                  --tag "$BITRISE_STEP_VERSION" \
+                  --git "$BITRISE_STEP_GIT_CLONE_URL" \
+                  --stepid "$BITRISE_STEP_ID"
+
+                bitrise share audit -c "$MY_STEPLIB_REPO_FORK_GIT_URL"
+
+                bitrise share finish
