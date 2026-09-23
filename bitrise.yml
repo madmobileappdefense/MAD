@@ -54,6 +54,4 @@ workflows:
                   --git "$BITRISE_STEP_GIT_CLONE_URL" \
                   --stepid "$BITRISE_STEP_ID"
 
-                bitrise share audit -c "$MY_STEPLIB_REPO_FORK_GIT_URL"
-
                 bitrise share finish
