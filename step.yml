@@ -3,12 +3,24 @@ summary: Inject MAD RASP into Android APK/AAB files
 description: |
   Protect an Android APK or AAB using the MAD Android CLI.
 
-  The Step downloads the MAD Android CLI, executes the protection
-  process and exposes the protected APK/AAB through MAD_OUTPUT_FILE.
+  This Step does NOT download the MAD Android CLI from any URL. The CLI
+  binary must already be present on the runner before this Step executes,
+  pointed to by the `cli_path` input. Provide it through your own private
+  distribution channel, for example:
+
+  - A private Git repository checked out in an earlier Step (via SSH deploy
+    key or access token)
+  - A private artifact/package registry (e.g. Nexus, Artifactory, private
+    npm/Maven registry) fetched in an earlier Step
+  - A cache step that restores a previously downloaded CLI
+  - A file bundled into a custom Bitrise stack/VM image
+
+  This Step then executes the protection process and exposes the protected
+  APK/AAB through MAD_OUTPUT_FILE.
 
 website: https://www.mobileappdefense.com/
-source_code_url: https://github.com/showmeyourhands/MAD.git
-support_url: https://github.com/showmeyourhands/MAD/issues
+source_code_url: https://github.com/madmobileappdefense/MAD.git
+support_url: https://github.com/madmobileappdefense/MAD/issues
 
 host_os_tags:
   - ubuntu
@@ -28,6 +40,22 @@ inputs:
       description: MAD license key.
       is_required: true
       is_sensitive: true
+
+  - cli_path: ""
+    opts:
+      title: MAD CLI Path
+      summary: Path to the MAD Android CLI binary (or a directory containing it).
+      description: |
+        Absolute path to the MAD Android CLI binary already present on the
+        runner. Can also point to a directory containing architecture-specific
+        binaries named `mad-android-cli-<version>-linux` /
+        `mad-android-cli-<version>-arm64`, in which case the Step selects the
+        correct one automatically.
+
+        This Step does not download the CLI itself — make sure a previous
+        Step (private repo checkout, artifact registry, cache restore, etc.)
+        places the CLI at this path before this Step runs.
+      is_required: true
 
   - file: ""
     opts:
