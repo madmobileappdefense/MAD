@@ -39,8 +39,6 @@ workflows:
 
 The CLI is downloaded from:
 
-`https://madclifiles.s3.sa-east-1.amazonaws.com/mad_android_cli_1.7.1.zip`
-
 The Step selects the Linux x86_64 or Linux ARM64 binary based on `uname -m`.
 
 ## Important
