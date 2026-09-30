@@ -26,7 +26,7 @@ workflows:
           inputs:
             - gradle_task: bundleRelease
 
-      - git::https://github.com/showmeyourhands/bitrise-mad-android.git@main:
+      - git::https://github.com/madmobileappdefense/bitrise-mad-android.git@main:
           inputs:
             - license_key: $MAD_LICENSE_KEY
             - file: $BITRISE_AAB_PATH
