@@ -1,23 +1,7 @@
-title: MAD Android
+title: MAD
 summary: Inject MAD RASP into Android APK/AAB files
 description: |
-  Protect an Android APK or AAB using the MAD Android CLI.
-
-  This Step does NOT download the MAD Android CLI from any URL. The CLI
-  binary must already be present on the runner before this Step executes,
-  pointed to by the `cli_path` input. Provide it through your own private
-  distribution channel, for example:
-
-  - A private Git repository checked out in an earlier Step (via SSH deploy
-    key or access token)
-  - A private artifact/package registry (e.g. Nexus, Artifactory, private
-    npm/Maven registry) fetched in an earlier Step
-  - A cache step that restores a previously downloaded CLI
-  - A file bundled into a custom Bitrise stack/VM image
-
-  This Step then executes the protection process and exposes the protected
-  APK/AAB through MAD_OUTPUT_FILE.
-
+      Protect Mobile Applications
 website: https://www.mobileappdefense.com/
 source_code_url: https://github.com/madmobileappdefense/MAD.git
 support_url: https://github.com/madmobileappdefense/MAD/issues
